@@ -1,57 +1,76 @@
-# OSRS_bots
+# OSRS\_bots
 
-A collection of **RuneMate bots** for Old School RuneScape, written in **Java**.  
-This repository is mainly for learning **Java, Gradle, IntelliJ IDEA**, and the **RuneMate SDK**.
+A collection of **RuneMate** bots for Old School RuneScape (OSRS), written in **Java**. This repo exists to learn **Java**, **Gradle**, **IntelliJ IDEA**, and the **RuneMate SDK**.
 
-> ⚠️ **Educational purposes only.**  
-> Botting violates Jagex’s Terms of Service and may lead to bans. Use at your own risk.
+> ⚠️ **Educational purposes only.** Botting violates Jagex’s Terms of Service and may lead to permanent bans. You are solely responsible for how you use this code. Do not use on accounts you value.
 
 ---
 
-## 🚀 How to Start
+## 🚀 Quick Start
 
-### 1. Install the tools
-- [RuneMate Client](https://www.runemate.com/)  
-- [RuneMate Docs](https://runemate.gitbook.io/runemate-documentation)  
-- [Java JDK 17 (LTS)](https://adoptium.net/temurin/releases/?version=17)  
-- [IntelliJ IDEA](https://www.jetbrains.com/idea/download/)  
+### 1) Install the tools
 
----
+* **RuneMate Client** (and create a dev account)
+* **RuneMate Docs** (reference while developing)
+* **Java JDK 17 (LTS)**
+* **IntelliJ IDEA** (Community is fine)
 
-### 2. Get the project
+> Ensure IntelliJ is using JDK **17** for the Gradle JVM (File → Settings → Build Tools → Gradle).
 
+### 2) Get the project
+
+```bash
 git clone https://github.com/Diiicode/OSRS_bots.git
 cd OSRS_bots
+```
 
-3. Open in IntelliJ
-Open the folder in IntelliJ.
-IntelliJ will detect the Gradle files (build.gradle.kts, settings.gradle.kts).
-Let it sync dependencies automatically.
+### 3) Open in IntelliJ
 
-4. Build the project
-Use the Gradle:
-build project with Gradle on Intellij
-run runemate with Gradle on Intellij
+Open the folder. IntelliJ will detect `Gradle` (files: `build.gradle.kts`, `settings.gradle.kts`) and **sync dependencies** automatically.
 
-6. Run your bot
-Started RuneMate in developer mode on Intellij (see docs).
-Log into RuneScape.
-Select your bot → click Start.
+### 4) Build
 
-📂 Project Layout
-bash
-Copy code
+From IntelliJ’s **Gradle** tool window or the terminal:
+
+```bash
+./gradlew clean build   # Windows: gradlew.bat
+```
+
+### 5) Run with RuneMate
+
+Follow the official docs to launch the **RuneMate client in developer mode** from IntelliJ, log in to RuneScape, select your bot, and click **Start**.
+
+> Use a throwaway account; respect the game rules.
+
+---
+
+## 📂 Project Layout
+
+```
 OSRS_bots/
-├─ src/main/java/com/runemate/<botname>/   # Bot source code
-│   └─ ExampleBot.java                     # Example skeleton bot
-├─ build.gradle.kts                        # Build config
-├─ settings.gradle.kts                     # Project settings
-├─ gradlew / gradlew.bat                   # Gradle wrappers
+├─ src/main/java/com/runemate/            # Bot source
+│  └─ ExampleBot.java                     # Example skeleton bot
+├─ build.gradle.kts                       # Build config
+├─ settings.gradle.kts                    # Project settings
+├─ gradlew / gradlew.bat                  # Gradle wrappers
 └─ README.md
+```
 
+---
 
-⚙️ Bot Manifest
-Every bot needs a manifest annotation so RuneMate can load it:
+## ⚙️ Bot Manifest
+
+Every bot needs a **manifest annotation** so RuneMate can detect and load it.
+
+```java
+package com.runemate;
+
+import com.runemate.game.api.script.framework.AbstractBot;
+import com.runemate.game.api.script.framework.listeners.events.MessageEvent;
+import com.runemate.game.api.script.framework.listeners.engine.EngineListener;
+import com.runemate.game.api.hybrid.util.Resources;
+import com.runemate.game.api.script.framework.AbstractBot.Description;
+import com.runemate.game.api.script.framework.AbstractBot.Manifest;
 
 @Manifest(
     name = "Woodcutting Bot",
@@ -59,7 +78,54 @@ Every bot needs a manifest annotation so RuneMate can load it:
     version = "1.0.0",
     author = "Diiicode"
 )
+public class ExampleBot extends AbstractBot implements EngineListener {
 
-🧑‍💻 Author
-Diogo Serra — GitHub/Diiicode
+    @Override
+    public void onStart(String... args) {
+        getLogger().info("Starting Woodcutting Bot…");
+    }
+
+    @Override
+    public void onStop() {
+        getLogger().info("Bot stopped.");
+    }
+
+    @Override
+    public void onLoop() {
+        // TODO: implement behavior tree / state machine
+        // Example: chop → wait → bank → return
+    }
+}
+```
+
+> Namespaces and base classes vary with SDK version—use the RuneMate docs for the exact imports and lifecycle methods.
+
+---
+
+## 🛠️ Dev Tips
+
+* **Gradle wrapper**: always use `./gradlew` so everyone builds with the same Gradle version.
+* **Code style**: keep methods small; model your bot as a **state machine** (Idle → Navigate → Act → Bank → Return).
+* **Logging**: prefer `getLogger().info/debug` over `System.out.println`.
+* **Testing safely**: run short sessions; watch for stuck states; build a dry‑run mode where actions are logged but not executed.
+
+---
+
+## ❓ Troubleshooting
+
+* IntelliJ can’t find JDK: set Gradle JVM to **17**.
+* Dependencies missing: **Reimport Gradle** project / `./gradlew --refresh-dependencies`.
+* RuneMate not detecting bot: confirm the **`@Manifest`** annotation and correct **package** under `src/main/java`.
+
+---
+
+## 👤 Author
+
+**Diogo Serra** — [GitHub @Diiicode](https://github.com/Diiicode)
 42 student (C, Bash, sysadmin, security). Learning automation & RuneMate SDK.
+
+---
+
+### Legal & Ethics
+
+This repository is for **learning**. Using bots in OSRS can result in bans and harms the game community. Please experiment responsibly and respect the game’s Terms of Service.
