@@ -1,33 +1,45 @@
 # OSRS_bots
 
-A collection of RuneMate bots written in **Java** for **Old School RuneScape (OSRS)**.  
-This repository is my personal playground for:
+A collection of RuneMate bots written in **Java** for **Old School RuneScape (OSRS)**.
 
-- Practicing **Java coding** and object-oriented design  
-- Learning about **automation**, **game scripting**, and **bot safety**  
-- Experimenting with RuneMate’s **LoopingBot framework**, API calls, and event handling  
-- Building scripts that mimic human-like behaviors (randomness, anti-patterns, etc.)  
+This repo is my playground for:
+- Practicing **Java/OOP** and clean architecture
+- Learning **automation & game scripting** on RuneMate
+- Experimenting with **LoopingBot**, queries, and event handling
+- Mimicking human-like behavior (breaks, camera movement, small delays)
 
----
-
-## ⚔️ Current Focus
-- Woodcutting bots (priority on willows, banking, and returning to last location)  
-- Future expansions: Fishing, Mining, Combat training, and more utility bots  
+> ⚠️ **Educational purposes only.**  
+> Botting violates Jagex’s Terms of Service and can lead to bans. Use at your own risk.
 
 ---
 
 ## 🚀 Getting Started
 
-> ⚠️ **Disclaimer:** These bots are for **educational purposes only**.  
-> Automating gameplay in OSRS **violates Jagex’s Terms of Service** and may lead to bans.  
-> Use at your own risk.
-
 ### Requirements
-- [RuneMate SDK](https://www.runemate.com/developer/documentation/)
-- Java 8+  
-- Basic knowledge of OSRS mechanics  
+- **RuneMate Client** (installer): https://www.runemate.com/  
+- **RuneMate Docs (Guides):** https://runemate.gitbook.io/runemate-documentation  
+- **Game API JavaDoc:** https://runemate.gitlab.io/community/runemate-game-api/runemate-game-api/  
+- **Java Development Kit (JDK)** – LTS recommended (e.g., 17): https://adoptium.net/temurin/releases/?version=17
 
-### Running a Bot
-1. Clone the repo:
+### Run locally
+1. Clone:
    ```bash
    git clone https://github.com/Diiicode/OSRS_bots.git
+   cd OSRS_bots
+Open in your IDE (IntelliJ IDEA / Eclipse / VS Code with Java).
+
+Build your bot module and launch RuneMate.
+
+Start the client in developer mode (see docs), then select your local bot from the client.
+
+LoopingBot example thread: https://www.runemate.com/community/threads/loopingbot-example.23320/
+
+📝 To-Do
+ Multi-bank support & location profiles
+ Anti-ban extras (mouse paths, camera nudges, idle checks)
+ Small task framework (state machine/task tree)
+ Diagrams & docstrings for public utilities
+
+🧑‍💻 Author
+Diogo Serra — https://github.com/Diiicode
+42 student (C, Bash, sysadmin, security). Also tinkering with automation & networking.
