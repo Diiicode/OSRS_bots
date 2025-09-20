@@ -38,6 +38,7 @@ OSRS_bots/
 ```bash
 cd dicode-woodcutting
 ./gradlew clean build   # Windows: gradlew.bat
+
 ```
 
 1. Launch RuneMate (dev mode) from IntelliJ.
